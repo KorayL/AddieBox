@@ -3,6 +3,13 @@ import board
 from PIL import Image, ImageDraw
 from adafruit_rgb_display import ili9341
 
+import RPi.GPIO as gpio
+
+gpio.setmode(gpio.BOARD)
+gpio.setup(11, gpio.OUT)
+
+gpio.output(11, gpio.HIGH)
+
 cs_pin = digitalio.DigitalInOut(board.CE0)
 dc_pin = digitalio.DigitalInOut(board.D25)
 reset_pin = digitalio.DigitalInOut(board.D24)
