@@ -26,5 +26,5 @@ image = Image.open("AddieBox/slope.jpg")
 disp.image(image)
 
 gpio.setmode(gpio.BCM)
-gpio.setup(17, gpio.OUT)
-gpio.output(17, gpio.HIGH)
+gpio.setup(2, gpio.OUT)
+gpio.output(2, gpio.HIGH)
