@@ -7,6 +7,9 @@ cs_pin = digitalio.DigitalInOut(board.CE0)
 dc_pin = digitalio.DigitalInOut(board.D25)
 reset_pin = digitalio.DigitalInOut(board.D24)
 
+# Config for display baudrate (default max is 24mhz):
+BAUDRATE = 24000000
+
 spi = board.SPI()
 disp = ili9341.ILI9341(
     spi,
