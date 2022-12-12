@@ -24,6 +24,6 @@ disp = ili9341.ILI9341(
 
 disp.rotation = 180
 
-image = Image.open("slope.jpg")
+image = Image.open("AddieBox/slope.jpg")
 
 disp.image(image)
