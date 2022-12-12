@@ -22,19 +22,6 @@ disp = ili9341.ILI9341(
     baudrate=BAUDRATE,
 )
 
-# Create blank image for drawing.
-# Make sure to create image with mode 'RGB' for full color.
-if disp.rotation % 180 == 90:
-    height = disp.width  # we swap height/width to rotate it to landscape!
-    width = disp.height
-else:
-    width = disp.width  # we swap height/width to rotate it to landscape!
-    height = disp.height
-image = Image.new("RGB", (width, height))
+image = Image.open("slope.jpg")
 
-# Get drawing object to draw on image.
-draw = ImageDraw.Draw(image)
-
-# Draw a black filled box to clear the image.
-draw.rectangle((0, 0, width, height), outline=0, fill=(255, 0, 0))
 disp.image(image)
