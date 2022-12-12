@@ -20,7 +20,7 @@ disp = ili9341.ILI9341(
     baudrate=BAUDRATE,
 )
 
-image = Image.new("RGB", (240, 320))
+image = Image.new("RGB", (320, 240))
 font = ImageFont.truetype(r"Comfortaa_Regular.ttf", 15)
 draw = ImageDraw.Draw(image)
 
