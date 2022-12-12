@@ -22,6 +22,8 @@ disp = ili9341.ILI9341(
     baudrate=BAUDRATE,
 )
 
+disp.rotation = 180
+
 image = Image.open("slope.jpg")
 
 disp.image(image)
