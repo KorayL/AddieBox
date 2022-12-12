@@ -5,6 +5,10 @@ from adafruit_rgb_display import ili9341
 
 import RPi.GPIO as gpio
 
+gpio.setmode(gpio.BCM)
+gpio.setup(2, gpio.OUT)
+gpio.output(2, gpio.HIGH)
+
 cs_pin = digitalio.DigitalInOut(board.CE0)
 dc_pin = digitalio.DigitalInOut(board.D25)
 reset_pin = digitalio.DigitalInOut(board.D24)
@@ -24,7 +28,3 @@ disp = ili9341.ILI9341(
 
 image = Image.open("AddieBox/slope.jpg")
 disp.image(image)
-
-gpio.setmode(gpio.BCM)
-gpio.setup(2, gpio.OUT)
-gpio.output(2, gpio.HIGH)
