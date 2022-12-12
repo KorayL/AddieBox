@@ -26,4 +26,4 @@ draw = ImageDraw.Draw(image)
 
 draw.text((0, 0), "This is a test", font=font, fill=(255, 255, 255))
 
-disp.Image(image)
+disp.image(image)
