@@ -1,6 +1,6 @@
 import digitalio
 import board
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 from adafruit_rgb_display import ili9341
 
 cs_pin = digitalio.DigitalInOut(board.CE0)
@@ -17,6 +17,10 @@ disp = ili9341.ILI9341(
     baudrate=BAUDRATE,
 )
 
-image = Image.open("AddieBox/slope.jpg")
+image = Image.new("RGB", (320, 240))
+font = ImageFont.truetype(r"Comfortaa_Regular.ttf", 15)
+draw = ImageDraw.Draw(image)
 
-disp.image(image)
+draw.text((0, 0), "This is a test", font=font, fill=(255, 255, 255))
+
+disp.Image(image)
