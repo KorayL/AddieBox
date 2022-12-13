@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
 
-fontName = "Comfortaa_Regular.ttf"
+fontName = "Questrial-Regular.ttf"
 image = Image.new("RGB", (320, 240))
 font = ImageFont.truetype(fontName, 15)
 draw = ImageDraw.Draw(image)
