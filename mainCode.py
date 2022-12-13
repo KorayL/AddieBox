@@ -30,7 +30,7 @@ def main():
 
     print(f"width: {displayWidth}\nheight: {displayHeight}")
 
-    blackImage = Image.new("RGB", (displayWidth, displayHeight))
+    blackImage = Image.new("RGB", (320, 240))
 
     tiltSwitch = Button(17)
     button = Button(27)
