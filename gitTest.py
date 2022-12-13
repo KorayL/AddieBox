@@ -1,3 +1,3 @@
-import git
+from git import Repo
 
 repo = Repo("/home/pi/AddieBox")
