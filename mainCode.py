@@ -25,8 +25,8 @@ def main():
         baudrate=BAUDRATE,
     )
 
-    displayWidth = disp.width
-    displayHeight = disp.height
+    displayWidth = disp.height      # swapped due to rotation
+    displayHeight = disp.width      # swapped due to rotation
 
     print(f"width: {displayWidth}\nheight: {displayHeight}")
 
@@ -39,7 +39,8 @@ def main():
         if tiltSwitch.is_pressed:
             pass
         else:
-            pass
+            disp.image(blackImage)
+        sleep(1)        # Reduces load
 
 def fit_string():
     pass
