@@ -1,24 +1,4 @@
-import digitalio
-import board
 from PIL import Image, ImageDraw, ImageFont
-from adafruit_rgb_display import ili9341
-
-cs_pin = digitalio.DigitalInOut(board.CE0)
-dc_pin = digitalio.DigitalInOut(board.D25)
-reset_pin = digitalio.DigitalInOut(board.D24)
-
-# Config for display baudrate (default max is 24mhz):
-BAUDRATE = 24000000
-
-spi = board.SPI()
-disp = ili9341.ILI9341(
-    spi,
-    rotation=90,
-    cs=cs_pin,
-    dc=dc_pin,
-    rst=reset_pin,
-    baudrate=BAUDRATE,
-)
 
 fontName = "Comfortaa_Regular.ttf"
 image = Image.new("RGB", (320, 240))
@@ -33,7 +13,6 @@ finalString = tokens[0]  # adds first word
 rightBound = font.getlength(finalString)  # gets length of first word (px)
 start = 0  # initialize start character index of current line
 
-# Adds line returns to finalString so it fits on screen
 for i, word in zip(range(1, len(tokens)), tokens[1:]):  # iterate through tokens with index i
     # get length of current line
     rightBound = font.getlength(f"{finalString[start:]} {word}")
@@ -62,5 +41,4 @@ width, height = right-left, top-bottom
 x, y = 160-0.5*width, 120+0.5*height
 
 draw.text((x, y), finalString, font=font, fill=(255, 255, 255))
-
-disp.image(image)
+image.show(image)
