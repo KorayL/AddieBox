@@ -18,7 +18,7 @@ def main():
     spi = board.SPI()
     disp = ili9341.ILI9341(
         spi,
-        rotation=90,
+        rotation=0,
         cs=cs_pin,
         dc=dc_pin,
         rst=reset_pin,
@@ -30,7 +30,7 @@ def main():
 
     print(f"width: {displayWidth}\nheight: {displayHeight}")
 
-    blackImage = Image.new("RGB", (320, 240))
+    blackImage = Image.new("RGB", (displayWidth, displayHeight))
 
     tiltSwitch = Button(17)
     button = Button(27)
