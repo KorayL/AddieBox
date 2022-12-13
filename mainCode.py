@@ -18,7 +18,7 @@ def main():
     spi = board.SPI()
     disp = ili9341.ILI9341(
         spi,
-        rotation=0,
+        rotation=90,
         cs=cs_pin,
         dc=dc_pin,
         rst=reset_pin,
