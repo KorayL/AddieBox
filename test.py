@@ -23,7 +23,7 @@ disp = ili9341.ILI9341(
 )
 
 image = Image.open("AddieBox/slope.jpg")
-blank = Image.new("RGB", (320, 240), (0, 0, 0))
+blank = Image.new("RGB", (240, 320), (0, 0, 0))
 
 tiltSwitch = Button(11)
 
