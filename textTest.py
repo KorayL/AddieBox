@@ -21,7 +21,7 @@ disp = ili9341.ILI9341(
 )
 
 fontName = "Comfortaa_Regular.ttf"
-image = Image.new("RGB", (320, 240))
+image = Image.new("RGB", (320, 240), (255, 255, 255))
 font = ImageFont.truetype(fontName, 15)
 draw = ImageDraw.Draw(image)
 
