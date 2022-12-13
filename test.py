@@ -4,6 +4,7 @@ from PIL import Image, ImageDraw
 from adafruit_rgb_display import ili9341
 
 from gpiozero import Button
+from time import sleep
 
 cs_pin = digitalio.DigitalInOut(board.CE0)
 dc_pin = digitalio.DigitalInOut(board.D25)
@@ -30,7 +31,9 @@ tiltSwitch = Button(17)
 
 while True:
     print(f"Is tiled? {tiltSwitch.is_pressed}")
+
     if tiltSwitch.is_pressed:
         disp.image(image)
     else:
         disp.image(blankImage)
+    sleep(10)
