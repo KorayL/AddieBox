@@ -20,7 +20,7 @@ disp = ili9341.ILI9341(
     baudrate=BAUDRATE,
 )
 
-fontName = "Comfortaa_Regular.ttf"
+fontName = "Questrial-Regular.ttf"
 image = Image.new("RGB", (320, 240), (0, 0, 0))
 font = ImageFont.truetype(fontName, 15)
 draw = ImageDraw.Draw(image)
