@@ -28,6 +28,7 @@ blank = Image.new("RGB", (240, 320), (0, 0, 0))
 tiltSwitch = Button(11)
 
 while True:
+    print(f"Is tiled? {tiltSwitch.is_pressed}")
     if tiltSwitch.is_pressed:
         disp.image(image)
     else:
