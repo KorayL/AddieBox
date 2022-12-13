@@ -23,9 +23,11 @@ disp = ili9341.ILI9341(
 )
 
 image = Image.open("AddieBox/slope.jpg")
-blank = Image.new("RGB", (240, 320), (0, 0, 0))
 
-tiltSwitch = Button(11)
+blankImage = Image.new("RGB", (240, 320), (0, 0, 0))
+blank = ImageDraw.Draw(blankImage)
+
+tiltSwitch = Button(17)
 
 while True:
     print(f"Is tiled? {tiltSwitch.is_pressed}")
