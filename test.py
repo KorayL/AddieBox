@@ -36,4 +36,4 @@ while True:
         disp.image(image)
     else:
         disp.image(blankImage)
-    sleep(10)
+        
