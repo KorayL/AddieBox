@@ -25,8 +25,12 @@ def main():
         baudrate=BAUDRATE,
     )
 
-    displayWidth = disp.width
-    displayHeight = disp.height
+    if display.rotatation % 180 == 0:
+        displayWidth = disp.height
+        displayHeight = disp.width
+    else:
+        displayWidth = disp.width
+        displayHeight = disp.height
 
     print(f"width: {displayWidth}\nheight: {displayHeight}")
 
