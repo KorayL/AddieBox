@@ -21,12 +21,13 @@ disp = ili9341.ILI9341(
 )
 
 fontName = "Comfortaa_Regular.ttf"
-image = Image.new("RGB", (320, 240), (255, 255, 255))
+image = Image.new("RGB", (320, 240), (0, 0, 0))
 font = ImageFont.truetype(fontName, 15)
 draw = ImageDraw.Draw(image)
 
-string = "In the loveliest town of all, where the houses were white and high and the elms trees were green and higher than the houses, where the front yards were wide and pleasant and the back yards were bushy and worth finding out about, where the streets sloped down to the stream and the stream flowed quietly under the bridge, where the lawns ended in orchards and the orchards ended in fields and the fields ended in pastures and the pastures climbed the hill and disappeared over the top toward the wonderful wide sky, in this loveliest of all towns Stuart stopped to"
+# string = "In the loveliest town of all, where the houses were white and high and the elms trees were green and higher than the houses, where the front yards were wide and pleasant and the back yards were bushy and worth finding out about, where the streets sloped down to the stream and the stream flowed quietly under the bridge, where the lawns ended in orchards and the orchards ended in fields and the fields ended in pastures and the pastures climbed the hill and disappeared over the top toward the wonderful wide sky, in this loveliest of all towns Stuart stopped to"
 # string = "Koray's Screen Works!"
+string = "This is just a really long test of my string line return 'algorithm'. I really hope it works well!"
 tokens = string.split()
 
 finalString = tokens[0]  # adds first word
@@ -61,6 +62,6 @@ left, top, right, bottom = draw.multiline_textbbox((0, 0), finalString, font=fon
 width, height = right-left, top-bottom
 x, y = 160-0.5*width, 120+0.5*height
 
-draw.text((x, y), finalString, font=font, fill=(0, 0, 0))
+draw.text((x, y), finalString, font=font, fill=(255, 255, 255))
 
 disp.image(image)
