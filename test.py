@@ -25,8 +25,6 @@ disp = ili9341.ILI9341(
 image = Image.open("AddieBox/slope.jpg")
 
 blankImage = Image.new("RGB", (240, 320))
-blank = ImageDraw.Draw(blankImage)
-blank = blank.rectangle((0, 0, 240, 320), fill = (0, 0, 0))
 
 tiltSwitch = Button(17)
 
@@ -35,4 +33,4 @@ while True:
     if tiltSwitch.is_pressed:
         disp.image(image)
     else:
-        disp.image(blank)
+        disp.image(blankImage)
