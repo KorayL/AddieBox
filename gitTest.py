@@ -1,4 +1,4 @@
 from git import Repo
 
 repo = Repo("/home/pi/AddieBox")
-print(repo.head)
+print(repo.head.commit)
