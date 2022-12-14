@@ -81,9 +81,7 @@ def update_accessed_files(file_number, accessed_files):
         accessedFileNumbers.append(file_number)
         file = open("AddieBox/accessedFiles.txt", "w")
         file.truncate(0)
-        print(",".join(accessedFileNumbers))
         file.write(",".join(accessedFileNumbers))
-
 
 
 def fetch_data():
