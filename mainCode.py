@@ -44,7 +44,7 @@ def main():
     fileNumber = 0
     while True:
         fileCount = len(os.listdir("Addie-Box-Data"))       # num of data files
-        accessedFiles = open("accessedFiles.txt", "r").read().split(",")        # all data files read
+        accessedFiles = open("AddieBox/accessedFiles.txt", "r").read().split(",")        # all data files read
 
         # turn on light if there are unread files
         if len(accessedFiles) < fileCount:
@@ -79,7 +79,7 @@ def update_accessed_files(file_number, accessed_files):
         accessedFileNumbers.append(fileName)
     if file_number not in accessedFileNumbers:
         accessedFileNumbers.append(file_number)
-        file = open("accessedFiles.txt", "w")
+        file = open("addieBox/accessedFiles.txt", "w")
         file.truncate(0)
         file.write(accessedFileNumbers.join(","))
 
