@@ -41,10 +41,11 @@ def main():
 
     fileData = fetch_data()
     lastState = 0       # 0: lid closed, 1: lid open
+    fileNumber = 0
     while True:
         if tiltSwitch.is_pressed:
-            fileNumber = 0     # work with last uploaded file
             if ~lastState:
+                fileNumber = 0  # work with last uploaded file
                 fileData = fetch_data()
             if button.is_pressed:
                 fileNumber += 1
