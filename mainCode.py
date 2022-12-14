@@ -50,7 +50,10 @@ def main():
             if button.is_pressed:
                 fileNumber += 1
 
-            fileData[fileNumber].display(displayWidth, displayHeight, disp)
+            try:
+                fileData[fileNumber].display(displayWidth, displayHeight, disp)
+            except IndexError:
+                fileNumber = 0
             lastState = 1
         else:
             disp.image(blackImage)
