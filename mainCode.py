@@ -66,8 +66,7 @@ def main():
                     except IndexError:
                         fileNumber = 0
                         fileData[fileNumber].display(displayWidth, displayHeight, disp)
-                    # update_accessed_files(fileCount - fileNumber, accessedFiles)
-
+                        # update_accessed_files(fileCount - fileNumber, accessedFiles)
         else:
             disp.image(blackImage)
             lastState = 0
