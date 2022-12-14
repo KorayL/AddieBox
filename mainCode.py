@@ -53,7 +53,7 @@ def main():
             try:
                 fileData[fileNumber].display(displayWidth, displayHeight, disp)
             except IndexError:
-                fileNumber = 0
+                fileNumber = -1
             lastState = 1
         else:
             disp.image(blackImage)
