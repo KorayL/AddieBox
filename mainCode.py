@@ -64,6 +64,7 @@ def main():
                     fileData[fileNumber].display(displayWidth, displayHeight, disp)
                     # update_accessed_files(fileCount - fileNumber, accessedFiles)
             except IndexError:
+                print("Index Error!")
                 fileNumber = 0
 
         else:
