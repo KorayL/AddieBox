@@ -49,7 +49,7 @@ def main():
             if button.is_pressed:
                 fileNumber += 1
 
-            fileData[fileNumber].display(displayWidth, displayHeight)
+            fileData[fileNumber].display(displayWidth, displayHeight, disp)
             lastState = 1
         else:
             disp.image(blackImage)
@@ -123,7 +123,7 @@ class file_type:
             self.type = "image"
         self.name = file_name
 
-    def display(self, width, height):
+    def display(self, width, height, disp):
         if self.type == "image":
             image = Image.open(f"Addie-Box-Data/{self.name}")
             disp.image(image)
