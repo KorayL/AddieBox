@@ -79,6 +79,7 @@ def update_accessed_files(file_number, accessed_files):
         accessedFileNumbers.append(fileName)
     if file_number not in accessedFileNumbers:
         accessedFileNumbers.append(file_number)
+        accessedFileNumbers.sort()
         file = open("AddieBox/accessedFiles.txt", "w")
         file.truncate(0)
         file.write(",".join(str(number) for number in accessedFileNumbers))
