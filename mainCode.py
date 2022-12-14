@@ -117,11 +117,11 @@ class file_type:
     def __init__(self, file_name):
         name, extension = os.path.splitext(file_name)
         if extension == ".txt":
-            type = "text"
-            text = open(f"Addie-Box-Data/{file_name}").read()
+            self.type = "text"
+            self.text = open(f"Addie-Box-Data/{file_name}").read()
         else:
-            type = "image"
-        name = file_name
+            self.type = "image"
+        self.name = file_name
 
     def display(self, width, height):
         if self.type == "image":
