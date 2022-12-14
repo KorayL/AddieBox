@@ -3,10 +3,9 @@ import board
 from PIL import Image, ImageDraw, ImageFont
 from adafruit_rgb_display import ili9341
 
-from gpiozero import Button
+from gpiozero import Button, LED
 import os
 
-from time import sleep
 
 def main():
     # Assign pin needed for SPI
@@ -38,25 +37,52 @@ def main():
 
     tiltSwitch = Button(17)
     button = Button(27)
+    led = LED(22)
 
     fileData = fetch_data()
     lastState = 0       # 0: lid closed, 1: lid open
     fileNumber = 0
     while True:
+        fileCount = len(os.listdir("Addie-Box-Data"))       # num of data files
+        accessedFiles = open("accessedFiles.txt", "r").read().split(",")        # all data files read
+
+        # turn on light if there are unread files
+        if len(accessedFiles) < fileCount:
+            led.on()
+        else:
+            led.off()
+
         if tiltSwitch.is_pressed:
             if not lastState:
                 fileNumber = 0  # work with last uploaded file
                 fileData = fetch_data()
+                fileData[fileNumber].display(displayWidth, displayHeight, disp)
+                update_accessed_files(fileCount-fileNumber, accessedFiles)
             if button.is_pressed:
                 fileNumber += 1
+                fileData[fileNumber].display(displayWidth, displayHeight, disp)
+                update_accessed_files(fileCount - fileNumber, accessedFiles)
             if fileNumber > len(fileData) - 1:
                 fileNumber = 0
 
-            fileData[fileNumber].display(displayWidth, displayHeight, disp)
             lastState = 1
+
         else:
             disp.image(blackImage)
             lastState = 0
+
+
+def update_accessed_files(file_number, accessed_files):
+    accessedFileNumbers = []
+    for fullName in accessed_files:
+        fileName, _ = os.path.splitext(fullName)
+        accessedFileNumbers.append(fileName)
+    if file_number not in accessedFileNumbers:
+        accessedFileNumbers.append(file_number)
+        file = open("accessedFiles.txt", "w")
+        file.truncate(0)
+        file.write(accessedFileNumbers.join(","))
+
 
 
 def fetch_data():
