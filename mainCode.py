@@ -49,11 +49,10 @@ def main():
                 fileData = fetch_data()
             if button.is_pressed:
                 fileNumber += 1
+            if fileNumber > len(fileData) - 1:
+                fileNumber = 0
 
-            try:
-                fileData[fileNumber].display(displayWidth, displayHeight, disp)
-            except IndexError:
-                fileNumber = -1
+            fileData[fileNumber].display(displayWidth, displayHeight, disp)
             lastState = 1
         else:
             disp.image(blackImage)
