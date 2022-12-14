@@ -1,9 +1,11 @@
 import digitalio
 import board
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 from adafruit_rgb_display import ili9341
 
 from gpiozero import Button
+import os
+
 from time import sleep
 
 def main():
@@ -32,22 +34,107 @@ def main():
         displayWidth = disp.width
         displayHeight = disp.height
 
-    print(f"width: {displayWidth}\nheight: {displayHeight}")
-
     blackImage = Image.new("RGB", (displayWidth, displayHeight))
 
     tiltSwitch = Button(17)
     button = Button(27)
 
+    fileData = fetch_data()
+    lastState = 0       # 0: lid closed, 1: lid open
     while True:
         if tiltSwitch.is_pressed:
-            pass
+            fileNumber = 0     # work with last uploaded file
+            if ~lastState:
+                fileData = fetch_data()
+            if button.is_pressed:
+                fileNumber += 1
+
+            fileData[fileNumber].display(displayWidth, displayHeight)
+            lastState = 1
         else:
             disp.image(blackImage)
-        sleep(1)        # Reduces load
+            lastState = 0
 
-def fit_string():
-    pass
+
+def fetch_data():
+    # Get text and image files to be used
+    dataFiles = os.listdir("../Addie-Box-Data")
+    dataFiles.remove(".git")
+    dataFiles.remove(".gitattributes")
+    dataFiles.sort(reverse=True)
+
+    # Create object list with type and possibly text attributes
+    dataObjects = []
+    for fileName in dataFiles:
+        dataObjects.append(file_type(fileName))
+
+    return dataObjects
+
+
+def fit_string(string):
+    # splits string into a list of every word
+    tokens = string.split()
+
+    font = ImageFont.truetype("Questrial-Regular.ttf", 15)
+
+    finalString = tokens[0]  # adds first word
+    rightBound = font.getlength(finalString)  # gets length of first word (px)
+    start = 0  # initialize start character index of current line
+
+    # Adds line returns to finalString so it fits on screen
+    for i, word in zip(range(1, len(tokens)), tokens[1:]):  # iterate through tokens with index i
+        # get length of current line
+        rightBound = font.getlength(f"{finalString[start:]} {word}")
+        if rightBound > 320:
+            finalString = f"{finalString}\n{word}"
+            # start is moved to index before the start of final word in string
+            start = len(finalString) - len(word)
+            rightBound = 0
+        else:
+            finalString = f"{finalString} {word}"
+
+    # Scale text to fill screen if finalString is one line
+    if "\n" not in finalString:
+        pixelSize = font.getlength(finalString)
+        i = 1
+        while pixelSize <= 320:
+            i += 1
+            font = ImageFont.truetype("Questrial-Regular.ttf", 15 + i)
+            pixelSize = font.getlength(finalString)
+        fontSize = 15 + i-1
+    else:
+        fontSize = font.size
+
+    # Center text
+    left, top, right, bottom = draw.multiline_textbbox((0, 0), finalString, font=font)
+    width, height = right - left, top - bottom
+    x, y = 160 - 0.5 * width, 120 + 0.5 * height
+
+    return finalString, (x, y), fontSize
+
+
+class file_type:
+    def __init__(self, file_name):
+        name, extension = os.path.splitext(file_name)
+        if extension == ".txt":
+            type = "text"
+            text = open(f"../Addie-Box-Data/{file_name}").read()
+        else:
+            type = "image"
+        name = file_name
+
+    def display(self, width, height):
+        if self.type == "image":
+            image = Image.open(f"../Addie-Box-Data/{self.name}")
+            disp.image(image)
+        else:
+            image = Image.new("RGB", (width, height))
+            draw = ImageDraw.Draw(image)
+            displayString, coordinates, fontSize = fit_string(self.text)
+            font = ImageFont.truetype("Questrial-Regular.ttf", fontSize)
+            draw.text(coordinates, displayString, font=font, fill=(255, 255, 255))
+            disp.image(image)
+
 
 if __name__ == '__main__':
     main()
