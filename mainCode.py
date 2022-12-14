@@ -58,7 +58,7 @@ def main():
 
 def fetch_data():
     # Get text and image files to be used
-    dataFiles = os.listdir("../Addie-Box-Data")
+    dataFiles = os.listdir("Addie-Box-Data")
     dataFiles.remove(".git")
     dataFiles.remove(".gitattributes")
     dataFiles.sort(reverse=True)
@@ -118,14 +118,14 @@ class file_type:
         name, extension = os.path.splitext(file_name)
         if extension == ".txt":
             type = "text"
-            text = open(f"../Addie-Box-Data/{file_name}").read()
+            text = open(f"Addie-Box-Data/{file_name}").read()
         else:
             type = "image"
         name = file_name
 
     def display(self, width, height):
         if self.type == "image":
-            image = Image.open(f"../Addie-Box-Data/{self.name}")
+            image = Image.open(f"Addie-Box-Data/{self.name}")
             disp.image(image)
         else:
             image = Image.new("RGB", (width, height))
