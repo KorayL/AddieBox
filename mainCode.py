@@ -53,19 +53,18 @@ def main():
         #     led.off()
 
         if tiltSwitch.is_pressed:
-            if not lastState:
-                fileNumber = 0  # work with last uploaded file
-                fileData = fetch_data()
-                fileData[fileNumber].display(displayWidth, displayHeight, disp)
-                # update_accessed_files(fileCount-fileNumber, accessedFiles)
-            if button.is_pressed:
-                fileNumber += 1
-                fileData[fileNumber].display(displayWidth, displayHeight, disp)
-                # update_accessed_files(fileCount - fileNumber, accessedFiles)
-            if fileNumber > len(fileData) - 1:
+            try:
+                if not lastState:
+                    fileNumber = 0  # work with last uploaded file
+                    fileData = fetch_data()
+                    fileData[fileNumber].display(displayWidth, displayHeight, disp)
+                    # update_accessed_files(fileCount-fileNumber, accessedFiles)
+                if button.is_pressed:
+                    fileNumber += 1
+                    fileData[fileNumber].display(displayWidth, displayHeight, disp)
+                    # update_accessed_files(fileCount - fileNumber, accessedFiles)
+            except IndexError:
                 fileNumber = 0
-            else:
-                lastState = 1
 
         else:
             disp.image(blackImage)
