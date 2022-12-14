@@ -61,11 +61,12 @@ def main():
                     # update_accessed_files(fileCount-fileNumber, accessedFiles)
                 if button.is_pressed:
                     fileNumber += 1
-                    fileData[fileNumber].display(displayWidth, displayHeight, disp)
+                    try:
+                        fileData[fileNumber].display(displayWidth, displayHeight, disp)
+                    except IndexError:
+                        fileNumber = 0
+                        fileData[fileNumber].display(displayWidth, displayHeight, disp)
                     # update_accessed_files(fileCount - fileNumber, accessedFiles)
-            except IndexError:
-                print("Index Error!")
-                fileNumber = 0
 
         else:
             disp.image(blackImage)
