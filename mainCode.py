@@ -53,7 +53,6 @@ def main():
         #     led.off()
 
         if tiltSwitch.is_pressed:
-            try:
                 if not lastState:
                     fileNumber = 0  # work with last uploaded file
                     fileData = fetch_data()
