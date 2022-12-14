@@ -71,7 +71,7 @@ def fetch_data():
     return dataObjects
 
 
-def fit_string(string):
+def fit_string(string, draw):
     # splits string into a list of every word
     tokens = string.split()
 
@@ -130,7 +130,7 @@ class file_type:
         else:
             image = Image.new("RGB", (width, height))
             draw = ImageDraw.Draw(image)
-            displayString, coordinates, fontSize = fit_string(self.text)
+            displayString, coordinates, fontSize = fit_string(self.text, draw)
             font = ImageFont.truetype("Questrial-Regular.ttf", fontSize)
             draw.text(coordinates, displayString, font=font, fill=(255, 255, 255))
             disp.image(image)
