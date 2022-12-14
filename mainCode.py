@@ -64,8 +64,8 @@ def main():
                 # update_accessed_files(fileCount - fileNumber, accessedFiles)
             if fileNumber > len(fileData) - 1:
                 fileNumber = 0
-
-            lastState = 1
+            else:
+                lastState = 1
 
         else:
             disp.image(blackImage)
