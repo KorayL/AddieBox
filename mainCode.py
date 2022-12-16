@@ -120,7 +120,7 @@ def fit_string(string, draw):
     # Scale text to fill screen if finalString is one line
     if "\n" not in finalString:
         pixelSizeAt15 = font.getlength(finalString)
-        fontSize = (320 // (pixelSizeAt15/15))
+        fontSize = int((320 // (pixelSizeAt15/15)))
 
     else:
         fontSize = font.size
@@ -151,7 +151,6 @@ class file_type:
             image = Image.new("RGB", (width, height))
             draw = ImageDraw.Draw(image)
             displayString, coordinates, fontSize = fit_string(self.text, draw)
-            print(fontSize)
             font = ImageFont.truetype("Questrial-Regular.ttf", fontSize)
             draw.text(coordinates, displayString, font=font, fill=(255, 255, 255))
             disp.image(image)
