@@ -132,7 +132,7 @@ def fit_string(string, draw):
     # Center text
     left, top, right, bottom = draw.multiline_textbbox((0, 0), finalString, font=font)
     width, height = right - left, bottom-top
-    x, y = 160 - 0.5 * width, 120 + 0.5 * height
+    x, y = 160 - 0.5 * width, 120 - 0.5 * height
 
     return finalString, (x, y), fontSize
 

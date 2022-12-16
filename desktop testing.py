@@ -36,7 +36,7 @@ if "\n" not in finalString:
 # Center text
 left, top, right, bottom = draw.multiline_textbbox((0, 0), finalString, font=font)
 width, height = right-left, bottom-top
-x, y = 160-0.5*width, 120+0.5*height
+x, y = 160-0.5*width, 120-0.5*height
 
 draw.text((x, y), finalString, font=font, fill=(255, 255, 255))
 image.show(image)
