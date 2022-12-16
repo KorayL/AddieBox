@@ -125,8 +125,10 @@ def fit_string(string, draw):
         textAspectRatio = width/height
         print(textAspectRatio)
         if textAspectRatio < 4/3:
+            print("height")
             pixelSizeAt15 = height
         else:
+            print("width")
             pixelSizeAt15 = width
 
         fontSize = int((320*15)//pixelSizeAt15)
