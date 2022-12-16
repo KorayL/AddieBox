@@ -121,10 +121,10 @@ def fit_string(string, draw):
     if "\n" not in finalString:
         pixelSizeAt15 = font.getlength(finalString)
         fontSize = int((320*15)//pixelSizeAt15)
+        font = ImageFont.truetype("Questrial-Regular.ttf", fontSize)
     else:
         fontSize = font.size
 
-    font = ImageFont.truetype("Questrial-Regular.ttf", fontSize)
     # Center text
     left, top, right, bottom = draw.multiline_textbbox((0, 0), finalString, font=font)
     width, height = right - left, bottom-top
