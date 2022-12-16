@@ -43,11 +43,11 @@ def main():
     lastState = 0       # 0: lid closed, 1: lid open
     fileNumber = 0
     while True:
-        fileCount = len(os.listdir("Addie-Box-Data"))       # num of data files
-        accessedFiles = open("AddieBox/accessedFiles.txt", "r").read().split(",")        # all data files read
 
-        # turn on light if there are unread files
-        if len(accessedFiles) < fileCount:
+        seenFiles = list(map(int, open("AddieBox/accessedFile.txt", "r").read().split(",")))
+        numberOfFilesPresent = len(os.listdir("Addie-Box-Data"))
+        # Turn on led if there are unseen messages
+        if len(seenFiles) < numberOfFilesPresent:
             led.on()
         else:
             led.off()
@@ -57,30 +57,25 @@ def main():
                 fileNumber = 0  # work with last uploaded file
                 fileData = fetch_data()
                 fileData[fileNumber].display(displayWidth, displayHeight, disp)
-                update_accessed_files(fileCount-fileNumber, accessedFiles)
+                update_seen_files(numberOfFilesPresent-fileNumber, seenFiles)
             if button.is_pressed:
                 fileNumber += 1
                 if fileNumber > len(fileData)-1:
                     fileNumber = 0
                 fileData[fileNumber].display(displayWidth, displayHeight, disp)
-                update_accessed_files(fileCount - fileNumber, accessedFiles)
+                update_seen_files(numberOfFilesPresent-fileNumber, seenFiles)
             lastState = 1
         else:
             disp.image(blackImage)
             lastState = 0
 
 
-def update_accessed_files(file_number, accessed_files):
-    accessedFileNumbers = []
-    for fullName in accessed_files:
-        fileName, _ = os.path.splitext(fullName)
-        accessedFileNumbers.append(fileName)
-    if file_number not in accessedFileNumbers:
-        accessedFileNumbers.append(file_number)
-        accessedFileNumbers.sort()
-        file = open("AddieBox/accessedFiles.txt", "w")
-        file.truncate(0)
-        file.write(",".join(str(number) for number in accessedFileNumbers))
+def update_seen_files(fileNumber, seenFiles):
+    if fileNumber not in seenFiles:
+        newSeenFiles = seenFiles.append(fileNumber).sort()
+        seenFilesFile = open("AddieBox/accessedFiles.txt", "w")
+        seenFilesFile.truncate(0)
+        seenFilesFile.write(newSeenFiles)
 
 
 def fetch_data():
