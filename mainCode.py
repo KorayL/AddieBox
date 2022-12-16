@@ -151,6 +151,7 @@ class file_type:
             image = Image.new("RGB", (width, height))
             draw = ImageDraw.Draw(image)
             displayString, coordinates, fontSize = fit_string(self.text, draw)
+            print(fontSize)
             font = ImageFont.truetype("Questrial-Regular.ttf", fontSize)
             draw.text(coordinates, displayString, font=font, fill=(255, 255, 255))
             disp.image(image)
