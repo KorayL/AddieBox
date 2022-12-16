@@ -119,10 +119,11 @@ def fit_string(string, draw):
 
     # Scale text to fill screen if finalString is one line
     if "\n" not in finalString:
+        print("if")
         pixelSizeAt15 = font.getlength(finalString)
         fontSize = int((320 // (pixelSizeAt15/15)))
-
     else:
+        print("else")
         fontSize = font.size
     print(font.size)
     # Center text
