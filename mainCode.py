@@ -121,7 +121,7 @@ def fit_string(string, draw):
     if "\n" not in finalString:
         print("if")
         pixelSizeAt15 = font.getlength(finalString)
-        fontSize = int((pixelSizeAt15/15) // 320)
+        fontSize = int((320*15)//pixelSizeAt15)
         print(fontSize)
     else:
         fontSize = font.size
