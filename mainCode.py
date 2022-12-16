@@ -45,7 +45,7 @@ def main():
     while True:
 
         seenFiles = list(map(int, open("AddieBox/accessedFiles.txt", "r").read().split(",")))
-        numberOfFilesPresent = len(os.listdir("Addie-Box-Data"))
+        numberOfFilesPresent = len(os.listdir("Addie-Box-Data"))-2
         # Turn on led if there are unseen messages
         if len(seenFiles) < numberOfFilesPresent:
             led.on()
