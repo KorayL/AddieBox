@@ -76,7 +76,7 @@ def update_seen_files(fileNumber, seenFiles):
         seenFiles.sort()
         seenFilesFile = open("AddieBox/accessedFiles.txt", "w")
         seenFilesFile.truncate(0)
-        seenFilesFile.write(seenFiles)
+        seenFilesFile.write(",".joing(list(map(str, seenFiles))))
 
 
 def fetch_data():
