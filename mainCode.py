@@ -59,7 +59,7 @@ def main():
                 fileData[fileNumber].display(displayWidth, displayHeight, disp)
                 update_seen_files(numberOfFilesPresent-fileNumber, seenFiles)
             if button.is_pressed:
-                fileNumber += 1
+                fileNumber += 1     # go to the second most recent file
                 if fileNumber > len(fileData)-1:
                     fileNumber = 0
                 fileData[fileNumber].display(displayWidth, displayHeight, disp)
@@ -75,7 +75,9 @@ def update_seen_files(fileNumber, seenFiles):
         seenFiles.append(fileNumber)
         seenFiles.sort()
         seenFilesFile = open("AddieBox/accessedFiles.txt", "w")
+        # clear the document
         seenFilesFile.truncate(0)
+        # change the int list to a str list, then convert it to a string and write it to the file
         seenFilesFile.write(",".join(list(map(str, seenFiles))))
 
 
@@ -126,7 +128,7 @@ def fit_string(string, draw):
         fontSize = 15 + i-1
     else:
         fontSize = font.size
-
+    print(font.size)
     # Center text
     left, top, right, bottom = draw.multiline_textbbox((0, 0), finalString, font=font)
     width, height = right - left, top - bottom
