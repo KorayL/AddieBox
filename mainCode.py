@@ -72,7 +72,8 @@ def main():
 
 def update_seen_files(fileNumber, seenFiles):
     if fileNumber not in seenFiles:
-        seenFiles.append(fileNumber).sort()
+        seenFiles.append(fileNumber)
+        seenFiles.sort()
         seenFilesFile = open("AddieBox/accessedFiles.txt", "w")
         seenFilesFile.truncate(0)
         seenFilesFile.write(seenFiles)
