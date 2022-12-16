@@ -123,6 +123,7 @@ def fit_string(string, draw):
         left, top, right, bottom = draw.textbbox((0, 0), finalString, font=font)
         width, height = right-left, bottom-top
         textAspectRatio = width/height
+        print(textAspectRatio)
         if textAspectRatio < 4/3:
             pixelSizeAt15 = height
         else:
