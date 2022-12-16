@@ -127,11 +127,13 @@ def fit_string(string, draw):
         if textAspectRatio < 4/3:
             print("height")
             pixelSizeAt15 = height
+            maxPixels = 240
         else:
             print("width")
             pixelSizeAt15 = width
+            maxPixels = 320
 
-        fontSize = int((320*15)//pixelSizeAt15)
+        fontSize = int((maxPixels*15)//pixelSizeAt15)
         font = ImageFont.truetype("Questrial-Regular.ttf", fontSize)
     else:
         fontSize = font.size
