@@ -119,7 +119,15 @@ def fit_string(string, draw):
 
     # Scale text to fill screen if finalString is one line
     if "\n" not in finalString:
-        pixelSizeAt15 = font.getlength(finalString)
+        font = ImageFont.truetype("Questrial-Regular.ttf", 15)
+        left, top, right, bottom = draw.textbbox((0, 0), finalString, font=font)
+        width, height = right-left, bottom-top
+        textAspectRatio = width/height
+        if textAspectRatio < 4/3:
+            pixelSizeAt15 = height
+        else:
+            pixelSizeAt15 = width
+
         fontSize = int((320*15)//pixelSizeAt15)
         font = ImageFont.truetype("Questrial-Regular.ttf", fontSize)
     else:
