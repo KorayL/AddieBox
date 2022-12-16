@@ -120,7 +120,7 @@ def fit_string(string, draw):
     # Scale text to fill screen if finalString is one line
     if "\n" not in finalString:
         pixelSizeAt15 = font.getlength(finalString)
-        fontSize = (320 / (pixelSizeAt15/15)) - 1
+        fontSize = (320 // (pixelSizeAt15/15))
 
     else:
         fontSize = font.size
