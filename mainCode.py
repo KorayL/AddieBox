@@ -86,7 +86,7 @@ def main():
 
             if button.is_pressed and ledOverride == 0:
                 ledOverride = 1
-            elif ledOverride == 0:
+            elif button.is_pressed and ledOverride == 0:
                 ledOverride = 0
 
 
