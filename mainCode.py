@@ -62,7 +62,7 @@ def main():
         if tiltSwitch.is_pressed:
             if not lastState:
                 fileNumber = 0  # work with last uploaded file
-                ledOverride = 0
+                ledOverride = 0 # reset the led-override
                 fileData = fetch_data()
                 fileData[fileNumber].display(displayWidth, displayHeight, disp)
                 update_seen_files(numberOfFilesPresent-fileNumber, seenFiles)
