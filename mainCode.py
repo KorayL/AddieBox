@@ -6,6 +6,7 @@ from adafruit_rgb_display import ili9341
 from gpiozero import Button, LED
 import os
 
+from git import Repo
 
 def main():
     # Assign pin needed for SPI
@@ -42,6 +43,7 @@ def main():
     fileData = fetch_data()
     lastState = 0       # 0: lid closed, 1: lid open
     fileNumber = 0
+    cloneLoopCounter = 0
     while True:
 
         seenFiles = list(map(int, open("AddieBox/accessedFiles.txt", "r").read().split(",")))
@@ -66,8 +68,17 @@ def main():
                 update_seen_files(numberOfFilesPresent-fileNumber, seenFiles)
             lastState = 1
         else:
-            disp.image(blackImage)
+            if lastState:
+                disp.image(blackImage)
             lastState = 0
+
+            # Update Data Files
+            if cloneLoopCounter >= 100:
+                os.rmdir("Addie-Box-Data")
+                Repo.clone_from("https://github.com/KorayL/Addie-Box-Data.git", "Addie-Box-Data")
+                cloneLoopCounter = 0
+            cloneLoopCounter += 1
+
 
 
 def update_seen_files(fileNumber, seenFiles):
