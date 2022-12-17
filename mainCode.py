@@ -39,6 +39,9 @@ def main():
     # Display black before loop starts
     disp.image(blackImage)
 
+    # Make sure data file exist before loop starts
+    replace_data_files()
+
     tiltSwitch = Button(17)
     button = Button(27)
     led = LED(22)
@@ -76,10 +79,16 @@ def main():
 
             # Update Data Files after 5,000 iterations of for loop
             if cloneLoopCounter >= 2_500:
-                shutil.rmtree("Addie-Box-Data")
-                Repo.clone_from("https://github.com/KorayL/Addie-Box-Data.git", "Addie-Box-Data")
+                replace_data_files()
                 cloneLoopCounter = 0
             cloneLoopCounter += 1
+
+
+def replace_data_files():
+    try:
+        shutil.rmtree("Addie-Box-Data")
+    finally:
+        Repo.clone_from("https://github.com/KorayL/Addie-Box-Data.git", "Addie-Box-Data")
 
 
 def update_seen_files(fileNumber, seenFiles):
