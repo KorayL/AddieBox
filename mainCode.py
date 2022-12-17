@@ -7,6 +7,7 @@ from gpiozero import Button, LED
 import os
 
 from git import Repo
+import shutil
 
 def main():
     # Assign pin needed for SPI
@@ -74,7 +75,7 @@ def main():
 
             # Update Data Files
             if cloneLoopCounter >= 100:
-                os.rmdir("Addie-Box-Data")
+                shutil.rmtree("Addie-Box-Data")
                 Repo.clone_from("https://github.com/KorayL/Addie-Box-Data.git", "Addie-Box-Data")
                 cloneLoopCounter = 0
             cloneLoopCounter += 1
