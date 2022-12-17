@@ -142,7 +142,7 @@ def fit_string(string, draw):
             pixelSizeAt15 = width
             maxPixels = 320
 
-        fontSize = int((maxPixels*15)//pixelSizeAt15)
+        fontSize = int((maxPixels*15)//pixelSizeAt15) - 1
         font = ImageFont.truetype("Questrial-Regular.ttf", fontSize)
     else:
         fontSize = font.size
