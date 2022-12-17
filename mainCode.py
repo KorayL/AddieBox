@@ -36,6 +36,8 @@ def main():
         displayHeight = disp.height
 
     blackImage = Image.new("RGB", (displayWidth, displayHeight))
+    # Display black before loop starts
+    disp.image(blackImage)
 
     tiltSwitch = Button(17)
     button = Button(27)
@@ -74,9 +76,11 @@ def main():
             lastState = 0
 
             # Update Data Files
-            if cloneLoopCounter >= 100:
+            if cloneLoopCounter >= 500:
                 shutil.rmtree("Addie-Box-Data")
+                print("repo removed")
                 Repo.clone_from("https://github.com/KorayL/Addie-Box-Data.git", "Addie-Box-Data")
+                print("repo cloned")
                 cloneLoopCounter = 0
             cloneLoopCounter += 1
 
