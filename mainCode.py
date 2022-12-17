@@ -137,11 +137,9 @@ def fit_string(string, draw):
         textAspectRatio = width/height
         print(textAspectRatio)
         if textAspectRatio < 4/3:
-            print("height")
             pixelSizeAt15 = height
             maxPixels = 240
         else:
-            print("width")
             pixelSizeAt15 = width
             maxPixels = 320
 
