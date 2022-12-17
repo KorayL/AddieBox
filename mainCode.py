@@ -48,13 +48,13 @@ def main():
 
     fileData = fetch_data()
     # last state explanation- 0: lid closed, 1: lid open
-    lastState, fileNumber, cloneLoopCounter = 0, 0, 0
+    lastState, fileNumber, cloneLoopCounter, ledOverride = 0, 0, 0, 0
     while True:
 
         seenFiles = list(map(int, open("AddieBox/accessedFiles.txt", "r").read().split(",")))
         numberOfFilesPresent = len(os.listdir("Addie-Box-Data"))-2
         # Turn on led if there are unseen messages
-        if len(seenFiles) < numberOfFilesPresent:
+        if (len(seenFiles) < numberOfFilesPresent) and not ledOverride:
             led.on()
         else:
             led.off()
@@ -62,6 +62,7 @@ def main():
         if tiltSwitch.is_pressed:
             if not lastState:
                 fileNumber = 0  # work with last uploaded file
+                ledOverride = 1
                 fileData = fetch_data()
                 fileData[fileNumber].display(displayWidth, displayHeight, disp)
                 update_seen_files(numberOfFilesPresent-fileNumber, seenFiles)
@@ -83,8 +84,10 @@ def main():
                 cloneLoopCounter = 0
             cloneLoopCounter += 1
 
-            if button.is_pressed:
-                led.off()
+            if button.is_pressed and ledOverride == 0:
+                ledOverride = 1
+            elif ledOverride == 0:
+                ledOverride = 0
 
 
 def replace_data_files():
