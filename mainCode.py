@@ -74,7 +74,7 @@ def main():
                 disp.image(blackImage)
             lastState = 0
 
-            # Update Data Files
+            # Update Data Files after 5,000 iterations of for loop
             if cloneLoopCounter >= 5_000:
                 shutil.rmtree("Addie-Box-Data")
                 print("repo removed")
@@ -82,7 +82,6 @@ def main():
                 print("repo cloned")
                 cloneLoopCounter = 0
             cloneLoopCounter += 1
-
 
 
 def update_seen_files(fileNumber, seenFiles):
@@ -138,7 +137,6 @@ def fit_string(string, draw):
         left, top, right, bottom = draw.textbbox((0, 0), finalString, font=font)
         width, height = right-left, bottom-top
         textAspectRatio = width/height
-        print(textAspectRatio)
         if textAspectRatio < 4/3:
             pixelSizeAt15 = height
             maxPixels = 240
