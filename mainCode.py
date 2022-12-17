@@ -86,8 +86,6 @@ def main():
 
             if button.is_pressed and ledOverride == 0:
                 ledOverride = 1
-            elif button.is_pressed and ledOverride == 1:
-                ledOverride = 0
 
 
 def replace_data_files():
