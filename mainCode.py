@@ -44,9 +44,8 @@ def main():
     led = LED(22)
 
     fileData = fetch_data()
-    lastState = 0       # 0: lid closed, 1: lid open
-    fileNumber = 0
-    cloneLoopCounter = 0
+    # last state explanation- 0: lid closed, 1: lid open
+    lastState, fileNumber, cloneLoopCounter = 0, 0, 0
     while True:
 
         seenFiles = list(map(int, open("AddieBox/accessedFiles.txt", "r").read().split(",")))
