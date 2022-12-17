@@ -75,7 +75,7 @@ def main():
             lastState = 0
 
             # Update Data Files
-            if cloneLoopCounter >= 2_500:
+            if cloneLoopCounter >= 5_000:
                 shutil.rmtree("Addie-Box-Data")
                 print("repo removed")
                 Repo.clone_from("https://github.com/KorayL/Addie-Box-Data.git", "Addie-Box-Data")
