@@ -83,10 +83,15 @@ def main():
                 cloneLoopCounter = 0
             cloneLoopCounter += 1
 
+            if button.is_pressed:
+                led.off()
+
 
 def replace_data_files():
     try:
         shutil.rmtree("Addie-Box-Data")
+    except FileNotFoundError:
+        pass
     finally:
         Repo.clone_from("https://github.com/KorayL/Addie-Box-Data.git", "Addie-Box-Data")
 
