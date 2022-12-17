@@ -77,9 +77,7 @@ def main():
             # Update Data Files after 5,000 iterations of for loop
             if cloneLoopCounter >= 5_000:
                 shutil.rmtree("Addie-Box-Data")
-                print("repo removed")
                 Repo.clone_from("https://github.com/KorayL/Addie-Box-Data.git", "Addie-Box-Data")
-                print("repo cloned")
                 cloneLoopCounter = 0
             cloneLoopCounter += 1
 
