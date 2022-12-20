@@ -51,7 +51,7 @@ def main():
     lastState, fileNumber, cloneLoopCounter, ledOverride = 0, 0, 0, 0
     while True:
 
-        seenFiles = list(map(int, open("AddieBox/accessedFiles.txt", "r").read().split(",")))
+        seenFiles = list(map(int, open("accessedFiles.txt", "r").read().split(",")))
         numberOfFilesPresent = len(os.listdir("Addie-Box-Data"))-2
         # Turn on led if there are unseen messages
         if (len(seenFiles) < numberOfFilesPresent) and not ledOverride:
@@ -101,7 +101,7 @@ def update_seen_files(fileNumber, seenFiles):
     if fileNumber not in seenFiles:
         seenFiles.append(fileNumber)
         seenFiles.sort()
-        seenFilesFile = open("AddieBox/accessedFiles.txt", "w")
+        seenFilesFile = open("accessedFiles.txt", "w")
         # clear the document
         seenFilesFile.truncate(0)
         # change the int list to a str list, then convert it to a string and write it to the file
