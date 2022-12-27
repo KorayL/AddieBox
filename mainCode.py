@@ -7,6 +7,7 @@ import os
 import re
 from git import Repo
 import shutil
+from time import sleep
 
 def main():
     # Assign pin needed for SPI
@@ -39,7 +40,7 @@ def main():
     disp.image(blackImage)
 
     # Make sure data file exist before loop starts
-    replace_data_files()
+    replace_data_files(disp)
 
     tiltSwitch = Button(17)
     button = Button(27)
@@ -79,7 +80,7 @@ def main():
 
             # Update Data Files after 5,000 iterations of for loop
             if cloneLoopCounter >= 2_500:
-                replace_data_files()
+                replace_data_files(disp)
                 cloneLoopCounter = 0
             cloneLoopCounter += 1
 
@@ -87,13 +88,22 @@ def main():
                 ledOverride = 1
 
 
-def replace_data_files():
+def replace_data_files(disp):
     try:
         shutil.rmtree("Addie-Box-Data")
     except FileNotFoundError:
         pass
     finally:
-        Repo.clone_from("https://github.com/KorayL/Addie-Box-Data.git", "Addie-Box-Data")
+        try:
+            Repo.clone_from("https://github.com/KorayL/Addie-Box-Data.git", "Addie-Box-Data")
+        except Exception:
+            image = Image.new("RGB", (320, 240))
+            draw = ImageDraw.Draw(image)
+            font = ImageFont.truetype("Questrial-Regular.ttf", 15)
+            draw.text((0, 0), "Data Retrieval Error!", font=font, fill=(255, 0, 0))
+            disp.image(image)
+            while True:
+                sleep(5)
 
 
 def update_seen_files(fileNumber, seenFiles):
