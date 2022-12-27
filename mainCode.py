@@ -2,10 +2,9 @@ import digitalio
 import board
 from PIL import Image, ImageDraw, ImageFont
 from adafruit_rgb_display import ili9341
-
 from gpiozero import Button, LED
 import os
-
+import re
 from git import Repo
 import shutil
 
@@ -62,7 +61,7 @@ def main():
         if tiltSwitch.is_pressed:
             if not lastState:
                 fileNumber = 0  # work with last uploaded file
-                ledOverride = 0 # reset the led-override
+                ledOverride = 0  # reset the led-override
                 fileData = fetch_data()
                 fileData[fileNumber].display(displayWidth, displayHeight, disp)
                 update_seen_files(numberOfFilesPresent-fileNumber, seenFiles)
@@ -113,7 +112,8 @@ def fetch_data():
     dataFiles = os.listdir("Addie-Box-Data")
     dataFiles.remove(".git")
     dataFiles.remove(".gitattributes")
-    dataFiles.sort(reverse=True)
+    # take away all non-numeric characters, and sort the list by that in reverse
+    dataFiles.sort(reverse=True, key=lambda file_name: int((re.sub('\D', '', file_name))))
 
     # Create object list with type and possibly text attributes
     dataObjects = []
